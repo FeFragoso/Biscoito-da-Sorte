@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react'
+import { View, Text, Image } from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
+
+EStyleSheet.build({})
 
 export default function App() {
+
+  const [img, setImg] = useState(require('./assets/biscoito.png'))
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+
+    <View style={s.container}>
+
+      <Image
+        source={img}
+        style={s.img}
+      />
+
+      <Text>" Teste de frase! "</Text>
+
     </View>
-  );
+
+  )
 }
 
-const styles = StyleSheet.create({
+const s = EStyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-});
+  img: {
+    width: 300,
+    heigth: 300
+  }
+})
