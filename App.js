@@ -7,6 +7,32 @@ EStyleSheet.build({})
 export default function App() {
 
   const [img, setImg] = useState(require('./assets/biscoito.png'))
+  const [textoFrase, setTextoFrase] = useState('')
+
+  let frases = [
+    'A gratidão é a memória do coração.',
+    'Deixe pra trás o que não te leva pra frente.',
+    'Viver não é esperar a tempestade passar, é aprender a dançar na chuva.',
+    'As crises não afastam os amigos. Apenas selecionam.',
+    'O sorriso é a melhor resposta para um olhar.',
+    'A vida é como andar de bicicleta. Para ter equilíbrio, você tem que se manter em movimento.',
+    'Falta de tempo é desculpa daqueles que perdem tempo por falta de métodos.',
+    'O primeiro dever da inteligência é desconfiar dela mesma.',
+    'O único homem que está isento de erros, é aquele que não arrisca acertar.'
+  ]
+
+  function quebraBiscoito() {
+    let x = Math.floor(Math.random() * frases.length)
+
+    setTextoFrase('" '+frases[x]+' "')
+    setImg(require('./assets/biscoitoAberto.png'))
+  }
+
+  function reiniciar() {
+
+    setTextoFrase('')
+    setImg(require('./assets/biscoito.png'))
+  }
 
   return (
 
@@ -17,20 +43,20 @@ export default function App() {
         style={s.img}
       />
 
-      <Text style={s.frase}>" Teste de frase! "</Text>
+      <Text style={s.frase}> {textoFrase} </Text>
 
       <View>
 
         <TouchableOpacity
           style={[s.btnQuebra, { marginBottom: 0 }]}
-          onPress={ ()=> alert('Foi!') }
+          onPress={ quebraBiscoito }
         >
           <Text style={s.btnTexto}>Quebrar Biscoito</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[s.btnQuebra, { borderColor: '#121212' }]}
-          onPress={ ()=> alert('Foi!') }
+          onPress={ reiniciar }
         >
           <Text style={[s.btnTexto, { color: '#121212' }]}>Reiniciar Biscoito</Text>
         </TouchableOpacity>
@@ -50,7 +76,10 @@ const s = EStyleSheet.create({
   },
   img: {
     resizeMode: 'contain',
-    width: '17.5rem'
+
+    width: '17.5rem',
+
+    margin: 0
   },
   frase: {
     margin: '1rem',
